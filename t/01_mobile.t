@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 32;
+use Test::More tests => 31;
 
 use Mail::Address;
 use Mail::Address::MobileJp;
