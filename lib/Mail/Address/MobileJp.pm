@@ -2,7 +2,7 @@ package Mail::Address::MobileJp;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = '0.01';
+$VERSION = '0.02';
 
 BEGIN {
     require Exporter;
@@ -66,7 +66,8 @@ page\.ttm\.ne\.jp|
 pho\.ne\.jp|
 moco\.ne\.jp|
 emcm\.ne\.jp|
-p1\.foomoon\.com
+p1\.foomoon\.com|
+.*\.i\-get\.ne\.jp 
 )$@x; # end of qr@@
 
 sub is_mobile_jp {

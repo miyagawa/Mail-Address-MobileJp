@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 23;
+use Test::More tests => 24;
 
 use Mail::Address;
 use Mail::Address::MobileJp;
@@ -23,6 +23,7 @@ my @ok = (
     'foo@phone.ne.jp',
     'foo@bar.mozio.ne.jp',
     'foo@p1.foomoon.com',
+    'foo@x.i-get.ne.jp',
     Mail::Address->parse('foo <foo@p1.foomoon.com>'),
 );
 

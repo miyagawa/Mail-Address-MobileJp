@@ -1,5 +1,8 @@
 Revision history for Perl extension Mail::Address::MobileJp.
 
+0.02  Sun Dec 16 22:13:30 JST 2001
+	- Added *.i-get.ne.jp
+
 0.01  Mon Nov 12 11:40:56 2001
 	- original version; created by h2xs 1.19
 
