@@ -2,22 +2,17 @@ package Mail::Address::MobileJp;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = '0.03';
+$VERSION = '0.04';
 
 BEGIN {
     require Exporter;
     @Mail::Address::MobileJp::ISA    = qw(Exporter);
-    @Mail::Address::MobileJp::EXPORT = qw(is_mobile_jp);
+    @Mail::Address::MobileJp::EXPORT = qw(is_mobile_jp is_imode is_vodafone is_ezweb);
 }
 
 # This regex is generated using http://www.mag2.com/faq/mobile.htm
 
-my $regex = qr@^(?:
-docomo\.ne\.jp|
-mnx\.ne\.jp|
-.*\.mnx\.ne\.jp|
-ezweb\.ne\.jp|
-.*\.ezweb\.ne\.jp|
+my $regex_mobile = qr@^(?:
 dct\.dion\.ne\.jp|
 tct\.dion\.ne\.jp|
 hct\.dion\.ne\.jp|
@@ -26,20 +21,9 @@ cct\.dion\.ne\.jp|
 sct\.dion\.ne\.jp|
 qct\.dion\.ne\.jp|
 oct\.dion\.ne\.jp|
-ez.\.ido\.ne\.jp|
-cmail\.ido\.ne\.jp|
 email\.sky\.tdp\.ne\.jp|
 email\.sky\.kdp\.ne\.jp|
 email\.sky\.cdp\.ne\.jp|
-jp\-d\.ne\.jp|
-jp\-h\.ne\.jp|
-jp\-t\.ne\.jp|
-jp\-c\.ne\.jp|
-jp\-r\.ne\.jp|
-jp\-k\.ne\.jp|
-jp\-n\.ne\.jp|
-jp\-s\.ne\.jp|
-jp\-q\.ne\.jp|
 sky\.tu\-ka\.ne\.jp|
 cara\.tu\-ka\.ne\.jp|
 sky\.tkk\.ne\.jp|
@@ -67,22 +51,55 @@ pho\.ne\.jp|
 moco\.ne\.jp|
 emcm\.ne\.jp|
 p1\.foomoon\.com|
-.*\.i\-get\.ne\.jp|
+mnx\.ne\.jp|
+.*\.mnx\.ne\.jp|
+ez.\.ido\.ne\.jp|
+cmail\.ido\.ne\.jp|
+.*\.i\-get\.ne\.jp
+)$@x; # end of qr@@
+
+my $regex_imode = qr@^(?:
+docomo\.ne\.jp
+)$@x; # end of qr@@
+
+my $regex_vodafone = qr@^(?:
+jp\-[dhtckrnsq]\.ne\.jp|
 [dhtckrnsq]\.vodafone\.ne\.jp
 )$@x; # end of qr@@
 
+my $regex_ezweb = qr@^(?:
+ezweb\.ne\.jp|
+.*\.ezweb\.ne\.jp
+)$@x; # end of qr@@
+
+
+sub is_imode {
+    my $domain = _domain(shift);
+    return $domain && $domain =~ /$regex_imode/o;
+}
+
+sub is_vodafone {
+    my $domain = _domain(shift);
+    return $domain && $domain =~ /$regex_vodafone/o;
+}
+
+sub is_ezweb {
+    my $domain = _domain(shift);
+    return $domain && $domain =~ /$regex_ezweb/o;
+}
+
 sub is_mobile_jp {
     my $domain = _domain(shift);
-    return $domain && $domain =~ /$regex/o;
+    return $domain && $domain =~ /(?:$regex_imode|$regex_vodafone|$regex_ezweb|$regex_mobile)/o;
 }
 
 sub _domain {
     my $stuff = shift;
     if (ref($stuff) && $stuff->isa('Mail::Address')) {
-	return $stuff->host;
+        return $stuff->host;
     }
-    my($user, $domain) = split /\@/, $stuff;
-    return $domain;
+    my $i = rindex($stuff, '@');
+    return $i >= 0 ? substr($stuff, $i + 1) : undef;
 }
 
 1;
@@ -122,6 +139,27 @@ This module exports following function(s).
   $bool = is_mobile_jp($email);
 
 returns whether C<$email> is a mobile email address or not. C<$email>
+can be an email string or Mail::Address object.
+
+=item is_imode
+
+  $bool = is_imode($email);
+
+returns whether C<$email> is a i-mode email address or not. C<$email>
+can be an email string or Mail::Address object.
+
+=item is_vodafone
+
+  $bool = is_vodafone($email);
+
+returns whether C<$email> is a vodafone(j-sky) email address or not. C<$email>
+can be an email string or Mail::Address object.
+
+=item is_ezweb
+
+  $bool = is_ezweb($email);
+
+returns whether C<$email> is a ezweb email address or not. C<$email>
 can be an email string or Mail::Address object.
 
 =back

@@ -24,8 +24,28 @@ FUNCTION
     is_mobile_jp
           $bool = is_mobile_jp($email);
 
-        returns whether `$email' is a mobile email address or not. `$email'
         can be an email string or Mail::Address object.
+
+    is_imode
+          $bool = is_imode($email);
+
+        returns whether $email is a i-mode email address or
+        not. $email can be an email string or Mail::Address
+        object.
+
+    is_vodafone
+          $bool = is_vodafone($email);
+
+        returns whether $email is a vodafone(j-sky) email
+        address or not. $email can be an email string or
+        Mail::Address object.
+
+    is_ezweb
+          $bool = is_ezweb($email);
+
+        returns whether $email is a ezweb email address or
+        not. $email can be an email string or Mail::Address
+        object.
 
 AUTHOR
     Tatsuhiko Miyagawa <miyagawa@bulknews.net>

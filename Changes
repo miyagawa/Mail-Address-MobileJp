@@ -1,5 +1,10 @@
 Revision history for Perl extension Mail::Address::MobileJp.
 
+0.04  Sun Oct 5 04:15:32 JST 2003
+	* Added is_docomo function
+        * Added is_vodafone function
+        * Added is_au function
+
 0.03  Tue Jul 15 17:44:44 JST 2003
 	* Added *.vodafone.ne.jp
 

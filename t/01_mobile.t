@@ -1,19 +1,31 @@
 use strict;
-use Test::More tests => 26;
+#use Test::More tests => 26;
+use Test::More qw(no_plan);
 
 use Mail::Address;
 use Mail::Address::MobileJp;
 
-my @ok = (
+my @ok_imode = (
     'foo@docomo.ne.jp',
-    'foo@mnx.ne.jp',
-    'foo@bar.mnx.ne.jp',
+);
+
+my @ok_vodafone = (
+    'foo@jp-d.ne.jp',
+    'foo@d.vodafone.ne.jp',
+);
+
+my @ok_ezweb = (
     'foo@ezweb.ne.jp',
     'foo@hoge.ezweb.ne.jp',
+);
+
+my @ok = (
+    @ok_imode,
+    @ok_vodafone,
+    @ok_ezweb,
+    'foo@mnx.ne.jp',
+    'foo@bar.mnx.ne.jp',
     'foo@dct.dion.ne.jp',
-    'foo@ez1.ido.ne.jp',
-    'foo@cmail.ido.ne.jp',
-    'foo@jp-d.ne.jp',
     'foo@sky.tu-ka.ne.jp',
     'foo@bar.sky.tkc.ne.jp',
     'foo@em.nttpnet.ne.jp',
@@ -24,7 +36,8 @@ my @ok = (
     'foo@bar.mozio.ne.jp',
     'foo@p1.foomoon.com',
     'foo@x.i-get.ne.jp',
-    'foo@d.vodafone.ne.jp',
+    'foo@ez1.ido.ne.jp',
+    'foo@cmail.ido.ne.jp',
     Mail::Address->parse('foo <foo@p1.foomoon.com>'),
 );
 
@@ -35,6 +48,18 @@ my @not = (
     'foo@a.vodafone.ne.jp',
     Mail::Address->parse('foo <foo@doo.com>'),
 );
+
+for my $ok (@ok_imode) {
+    ok is_imode($ok), "$ok";
+}
+
+for my $ok (@ok_vodafone) {
+    ok is_vodafone($ok), "$ok";
+}
+
+for my $ok (@ok_ezweb) {
+    ok is_ezweb($ok), "$ok";
+}
 
 for my $ok (@ok) {
     ok is_mobile_jp($ok), "$ok";
