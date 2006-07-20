@@ -1,5 +1,8 @@
 Revision history for Perl extension Mail::Address::MobileJp.
 
+0.05  Fri Jul 21 00:36:02 JST 2006
+        * Added is_softbank and softbank.ne.jp to is_mobile domain
+
 0.04  Sun Oct 5 04:15:32 JST 2003
 	* Added is_docomo function
         * Added is_vodafone function

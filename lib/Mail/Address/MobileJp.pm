@@ -2,12 +2,12 @@ package Mail::Address::MobileJp;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = '0.04';
+$VERSION = '0.05';
 
 BEGIN {
     require Exporter;
     @Mail::Address::MobileJp::ISA    = qw(Exporter);
-    @Mail::Address::MobileJp::EXPORT = qw(is_mobile_jp is_imode is_vodafone is_ezweb);
+    @Mail::Address::MobileJp::EXPORT = qw(is_mobile_jp is_imode is_vodafone is_ezweb is_softbank);
 }
 
 # This regex is generated using http://www.mag2.com/faq/mobile.htm
@@ -67,6 +67,8 @@ jp\-[dhtckrnsq]\.ne\.jp|
 [dhtckrnsq]\.vodafone\.ne\.jp
 )$@x; # end of qr@@
 
+my $regexp_softbank = qr@^softbank\.ne\.jp$@;
+
 my $regex_ezweb = qr@^(?:
 ezweb\.ne\.jp|
 .*\.ezweb\.ne\.jp
@@ -83,6 +85,11 @@ sub is_vodafone {
     return $domain && $domain =~ /$regex_vodafone/o;
 }
 
+sub is_softbank {
+    my $domain = _domain(shift);
+    return $domain && $domain =~ /$regexp_softbank/o;
+}
+
 sub is_ezweb {
     my $domain = _domain(shift);
     return $domain && $domain =~ /$regex_ezweb/o;
@@ -90,7 +97,7 @@ sub is_ezweb {
 
 sub is_mobile_jp {
     my $domain = _domain(shift);
-    return $domain && $domain =~ /(?:$regex_imode|$regex_vodafone|$regex_ezweb|$regex_mobile)/o;
+    return $domain && $domain =~ /(?:$regex_imode|$regex_vodafone|$regex_ezweb|$regex_mobile|$regexp_softbank)/o;
 }
 
 sub _domain {
@@ -160,6 +167,13 @@ can be an email string or Mail::Address object.
   $bool = is_ezweb($email);
 
 returns whether C<$email> is a ezweb email address or not. C<$email>
+can be an email string or Mail::Address object.
+
+=item is_softbank
+
+  $bool = is_softbank($email);
+
+returns whether C<$email> is a softbank email address or not. C<$email>
 can be an email string or Mail::Address object.
 
 =back

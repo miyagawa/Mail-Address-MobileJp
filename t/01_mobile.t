@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 31;
+use Test::More tests => 32;
 
 use Mail::Address;
 use Mail::Address::MobileJp;
@@ -18,10 +18,15 @@ my @ok_ezweb = (
     'foo@hoge.ezweb.ne.jp',
 );
 
+my @ok_softbank = (
+    'foo@softbank.ne.jp',
+);
+
 my @ok = (
     @ok_imode,
     @ok_vodafone,
     @ok_ezweb,
+    @ok_softbank,
     'foo@mnx.ne.jp',
     'foo@bar.mnx.ne.jp',
     'foo@dct.dion.ne.jp',
@@ -44,7 +49,6 @@ my @not = (
     'foo@example.com',
     'foo@dxx.pdx.ne.jp',
     'barabr',
-    'foo@a.vodafone.ne.jp',
     Mail::Address->parse('foo <foo@doo.com>'),
 );
 
@@ -58,6 +62,10 @@ for my $ok (@ok_vodafone) {
 
 for my $ok (@ok_ezweb) {
     ok is_ezweb($ok), "$ok";
+}
+
+for my $ok (@ok_softbank) {
+    ok is_softbank($ok), "$ok";
 }
 
 for my $ok (@ok) {
