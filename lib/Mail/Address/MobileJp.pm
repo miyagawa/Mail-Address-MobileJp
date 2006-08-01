@@ -2,7 +2,7 @@ package Mail::Address::MobileJp;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = '0.05';
+$VERSION = '0.06';
 
 BEGIN {
     require Exporter;
@@ -43,6 +43,7 @@ cmshikoku\.nttpnet\.ne\.jp|
 cmkyusyu\.nttpnet\.ne\.jp|
 pdx\.ne\.jp|
 d.\.pdx\.ne\.jp|
+wm\.pdx\.ne\.jp|
 phone\.ne\.jp|
 .*\.mozio\.ne\.jp|
 page\.docomonet\.or\.jp|

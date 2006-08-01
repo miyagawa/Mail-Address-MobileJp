@@ -1,5 +1,8 @@
 Revision history for Perl extension Mail::Address::MobileJp.
 
+0.06  Tue Aug  1 13:14:51 JST 2006
+        * Added wm.pdx.ne.jp
+
 0.05  Fri Jul 21 00:36:02 JST 2006
         * Added is_softbank and softbank.ne.jp to is_mobile domain
 
