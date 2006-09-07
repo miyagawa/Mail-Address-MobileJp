@@ -2,7 +2,7 @@ package Mail::Address::MobileJp;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = '0.06';
+$VERSION = '0.07';
 
 BEGIN {
     require Exporter;
@@ -65,10 +65,9 @@ docomo\.ne\.jp
 
 my $regex_vodafone = qr@^(?:
 jp\-[dhtckrnsq]\.ne\.jp|
-[dhtckrnsq]\.vodafone\.ne\.jp
+[dhtckrnsq]\.vodafone\.ne\.jp|
+^softbank\.ne\.jp
 )$@x; # end of qr@@
-
-my $regexp_softbank = qr@^softbank\.ne\.jp$@;
 
 my $regex_ezweb = qr@^(?:
 ezweb\.ne\.jp|
@@ -86,10 +85,7 @@ sub is_vodafone {
     return $domain && $domain =~ /$regex_vodafone/o;
 }
 
-sub is_softbank {
-    my $domain = _domain(shift);
-    return $domain && $domain =~ /$regexp_softbank/o;
-}
+*is_softbank = \&is_vodafone;
 
 sub is_ezweb {
     my $domain = _domain(shift);
@@ -98,7 +94,7 @@ sub is_ezweb {
 
 sub is_mobile_jp {
     my $domain = _domain(shift);
-    return $domain && $domain =~ /(?:$regex_imode|$regex_vodafone|$regex_ezweb|$regex_mobile|$regexp_softbank)/o;
+    return $domain && $domain =~ /(?:$regex_imode|$regex_vodafone|$regex_ezweb|$regex_mobile)/o;
 }
 
 sub _domain {

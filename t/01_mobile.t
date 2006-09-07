@@ -1,5 +1,5 @@
 use strict;
-use Test::More tests => 32;
+use Test::More tests => 36;
 
 use Mail::Address;
 use Mail::Address::MobileJp;
@@ -11,6 +11,7 @@ my @ok_imode = (
 my @ok_vodafone = (
     'foo@jp-d.ne.jp',
     'foo@d.vodafone.ne.jp',
+    'foo@softbank.ne.jp',
 );
 
 my @ok_ezweb = (
@@ -20,6 +21,7 @@ my @ok_ezweb = (
 
 my @ok_softbank = (
     'foo@softbank.ne.jp',
+    'foo@d.vodafone.ne.jp',
 );
 
 my @ok = (
