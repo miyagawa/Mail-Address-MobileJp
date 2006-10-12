@@ -128,7 +128,7 @@ Mail::Address::MobileJp - mobile email address in Japan
 =head1 DESCRIPTION
 
 Mail::Address::MobileJp is an utility to detect an email address is
-mobile (cellurar) email address or not.
+mobile (cellphone) email address or not.
 
 This module should be updated heavily :)
 
