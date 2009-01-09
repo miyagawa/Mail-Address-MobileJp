@@ -1,5 +1,9 @@
 Revision history for Perl extension Mail::Address::MobileJp.
 
+0.09  Thu Jan  8 19:02:20 PST 2009
+        * added willcom.com
+        (Thanks to bonnu)
+
 0.08  Mon Jan 21 21:41:33 PST 2008
         * Added @disney.ne.jp to is_softbank
           http://japan.cnet.com/mobile/story/0,3800078151,20365410,00.htm

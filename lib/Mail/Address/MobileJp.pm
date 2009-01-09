@@ -2,7 +2,7 @@ package Mail::Address::MobileJp;
 
 use strict;
 use vars qw($VERSION);
-$VERSION = '0.08';
+$VERSION = '0.09';
 
 BEGIN {
     require Exporter;
@@ -56,7 +56,8 @@ mnx\.ne\.jp|
 .*\.mnx\.ne\.jp|
 ez.\.ido\.ne\.jp|
 cmail\.ido\.ne\.jp|
-.*\.i\-get\.ne\.jp
+.*\.i\-get\.ne\.jp|
+willcom\.com
 )$@x; # end of qr@@
 
 my $regex_imode = qr@^(?:
